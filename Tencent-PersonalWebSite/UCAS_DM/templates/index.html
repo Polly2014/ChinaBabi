@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+	<!-- CSS -->
+	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+	<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'css/supersized.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+
+</head>
+<body>
+<!-- 	<form id="form_search" action="detail/" method="POST">
+		<label for="documentID">查询序号:</label>
+		<input type="text" id="documentID" name="documentID" placeholder="文档ID" /><br />
+		<label for="documentCode">查验码:</label>
+		<input type="text" id="documentCode" name="documentCode" placeholder="查验码"><br />
+		<button type="button" class="btn_submit" id="btn_submit" onclick="formValidAndSubmit()">查询</button>
+	</form> -->
+	<div class="page-container">
+		<h1>中国科学院办公厅公文管理查询系统</h1>
+		<form id="form_search" action="detail/" method="post">
+			<input id="documentID" type="text" name="documentID" class="documentID" placeholder="文档ID">
+			<input id="documentCode" type="password" name="documentCode" class="documentCode" placeholder="查验码">
+			<button type="button" class="btn_submit" id="btn_submit" onclick="formValidAndSubmit()">查询</button>
+			<div class="error"><span>+</span></div>
+		</form>
+	</div>
+
+<!-- Javascript -->
+<script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+<script src="{% static 'js/supersized.3.2.7.min.js' %}"></script>
+<script src="{% static 'js/supersized-init.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+<script type="text/javascript">
+function formValidAndSubmit(){
+	var documentID = $('#documentID').val();
+	var documentCode = $('#documentCode').val();
+	if(!documentID || !documentCode){
+		alert('输入不能为空!');
+		return;
+	}
+	var params = {'documentID':documentID, 'documentCode':documentCode}
+	$.ajax({
+		type: 'post',
+		url: 'valid/',
+		data: params,
+		async: false,
+		dataType: 'json',
+		success: function(data){
+			// console.log("Ajax Data:"+data);
+			if(data['code']==0){
+				$('#form_search').submit();
+			}else{
+				alert(data['message']);
+			}
+		}
+	})
+	return false;
+}
+</script>
+</body>
+</html>

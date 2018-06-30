@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>fullPage.js — 绑定菜单演示</title>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/pure-min.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery.fullPage.css' %}">
+<style>
+.w-800{ width:800px; max-width: 800px; margin:0 auto;}
+#div_container{max-width: 980px; margin:0 auto;}
+#menu { margin: 0; padding: 0; position: fixed; left: 10px; top: 10px; list-style-type: none; z-index: 70;}
+#menu li { float: left; margin:  0 10px 0 0; font-size: 14px;}
+#menu a { float: left; padding: 10px 20px; background-color: #fff; color: #333; text-decoration: none;}
+#menu .active a { color: #fff; background-color: #333;}
+.section { text-align: center; font: 50px "Microsoft Yahei"; color: #fff;}
+</style>
+</head>
+<body>
+<ul id="menu">
+	<li data-menuanchor="page1" class="active"><a href="#page1">第一屏</a></li>
+	<li data-menuanchor="page2"><a href="#page2">第二屏</a></li>
+	<li data-menuanchor="page3"><a href="#page3">第三屏</a></li>
+	<li data-menuanchor="page4"><a href="#page4">第四屏</a></li>
+</ul>
+<div class="section">
+	<img class="pure-img" src="/static/img/background_0.png" alt="Background">
+</div>
+<div class="section">
+	<img class="pure-img" src="/static/img/rule_2.png" alt="Rule">
+</div>
+<div class="section">
+	<h3>第三屏</h3>
+	<p>绑定的菜单没有默认的样式，你需要自行编写</p>
+</div>
+<div class="section">
+	<h3>Email</h3>
+	<p>26716201@qq.com</p>
+</div>
+</body>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui-1.10.3.min.js' %}"></script>
+<script src="{% static 'js/jquery.fullPage.min.js' %}"></script>
+<script>
+$(document).ready(function() {
+	$.fn.fullpage({
+		slidesColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90'],
+		anchors: ['page1', 'page2', 'page3', 'page4'],
+		menu: '#menu'
+	});
+});
+</script>
+</html>

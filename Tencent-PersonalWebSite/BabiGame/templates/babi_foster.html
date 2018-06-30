@@ -1,0 +1,477 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Babi Foster</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'css/pure-min.css' %}">
+	<!--[if lte IE 8]>
+		<link rel="stylesheet" href="{% static 'css/grids-responsive-old-ie-min.css' %}">
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="{% static 'css/grids-responsive-min.css' %}">
+	<!--<![endif]-->
+<style type="text/css">
+body{background: #ffc4c4;}
+#div_container{max-width: 980px; margin:0 auto;}
+	#div_babiInfo{margin-top:10%; top:auto;}
+		#img_babi{padding: 5%;}
+		#score_babi{text-align: center; font-size: 1.2em; margin-top: 10px;}
+	#div_fosterInfo{margin-top:10%; top:auto;}
+		#count_foster{text-align: center; font-size: 1.5em; padding-top:5%;}
+			#span_count{color: red;}
+		#tips_foster{text-align: center; font-size: 1.1em; height: 30px;}
+			#span_tips{}
+		#menu_foster{min-height: 50px; padding:0 5%;}
+			.menu{padding:15%; display: block; position: relative; text-align: center;}
+				.menu_text{margin:0 auto;}
+				.item:hover{transform:scale(1.1);}
+		#skill_foster{text-align: center; padding:2%; width: 80%; min-height:260px; margin:0 auto;}
+			.active{display: block;}
+			.hidden{display: none;}
+			.skill{margin-top:10px; height: 30px; max-height: 30px; font-size: 1.1em; font-weight:500;}
+			.skill a{text-decoration: none; display: block; width: 90%; margin:10px auto; border-radius:24px; background:linear-gradient(#faa2b9,#e26687); padding: 5px; color:#ad0b60; box-shadow:5px 5px 3px #888888;}
+			.skill a:hover{ background:linear-gradient(#e26687,#faa2b9); color: #FFF;}
+			#skill_finished{color: #ad0b60;}
+				#span_role{color:;}
+			#skill_sucess{color: #ad0b60;}
+				#span_adress{padding: 10px auto;}
+		#evalue_foster{text-align: center; padding:2%; width: 80%; margin:0 auto; margin-top: 20px;}
+			#evalue_foster a{ font-size: 0.9em; text-decoration: none; color: #222;}
+			#evalue_foster a:hover{color: #ad0b60;}
+
+/*#img_babi{width: 10%;}
+#div_notice{ text-align: center; font-size: 1.2em;}
+	#div_notice span{color:red;}
+#div_foster{ width: 100%; }
+.foster{ float:left; }
+	#foster_photo{width: 40%;}
+	#foster_photo img{width: 100%;}
+	#foster_skill{width: 60%;}
+		#div_skill{width: 100%; height: 20%; padding-top:5%; padding-left:20%; font-size:1.5em;}
+		#foster_skill ul{list-style: none; padding: 5%;}
+		#foster_skill ul li{display:block; margin-top: 5%; width: 100%; font-size: 1.2em;}
+		#foster_skill ul li a{display:block; width:100%; height:50px; line-height:50px; text-decoration: none; padding-left: 15%;}
+		#div_evaluate{display: none;}
+*/
+</style>
+</head>
+<body>
+<div id="div_container" class="pure-g">
+	<div id="div_babiInfo" class="pure-u-1 pure-u-md-1-2">
+		<div id="img_babi">
+			<img id="photo_babi" class="pure-img" src="/static/img/babi_0.png" alt="Babi Photo" />
+		</div>
+		<div id="score_babi" class="pure-g">
+			<div class="pure-u-1-3">唱功: <span id="span_sing"></span>分</div>
+			<div class="pure-u-1-3">舞蹈: <span id="span_dancing"></span>分</div>
+			<div class="pure-u-1-3">艺能: <span id="span_acting"></span>分</div>
+		</div>
+	</div>
+	<div id="div_fosterInfo" class="pure-u-1 pure-u-md-1-2">
+		<div id="count_foster">
+			<p>您还剩余 <span id="span_count">XX</span> 次Babi训练机会</p>
+		</div>
+
+		<div id="tips_foster">
+			<span id="span_tips"></span>
+		</div>
+
+		<div id="menu_foster">
+			<div class="pure-g menus">
+				<div class="pure-u-1-3">
+					<div class="menu">
+						<a href="javascript:;" onclick="showFosterSkills('skill_sing');"><img id="img_sing" class="pure-img item" src="/static/img/img_menu_sing.png" alt="Sing" /></a>
+					</div>
+				</div>
+				<div class="pure-u-1-3">
+					<div class="menu">
+						<a href="javascript:;" onclick="showFosterSkills('skill_dancing');"><img class="pure-img item" src="/static/img/img_menu_dancing.png" alt="Dancing" /></a>
+					</div>
+				</div>
+				<div class="pure-u-1-3">
+					<div class="menu">
+						<a href="javascript:;" onclick="showFosterSkills('skill_acting');"><img class="pure-img item" src="/static/img/img_menu_acting.png" alt="Acting" /></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="skill_foster">
+			<div id="skill_none" class="pure-g skill">
+				<div class="pure-u-1">
+					（点击上面按钮选择训练项目）
+				</div>
+			</div>
+			<!--
+			<div id="skill_sing" class="pure-g skill hidden">
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('YL');"><img class="pure-img" src="/static/img/img_skill.png" alt="乐理"></a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('DC');"><img class="pure-img" src="/static/img/img_skill.png" alt="独唱"></a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('HY');"><img class="pure-img" src="/static/img/img_skill.png" alt="和音"></a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('HC');"><img class="pure-img" src="/static/img/img_skill.png" alt="合唱"></a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('JQ');"><img class="pure-img" src="/static/img/img_skill.png" alt="唱歌技巧"></a></div>
+			</div>
+			-->
+			<div id="skill_sing" class="pure-g skill hidden">
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('YL');">乐&nbsp;&nbsp;理</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('DC');">独&nbsp;&nbsp;唱</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('HY');">和&nbsp;&nbsp;音</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('HC');">合&nbsp;&nbsp;唱</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('JQ');">唱歌技巧</a></div>
+			</div>
+			<div id="skill_dancing" class="pure-g skill hidden">
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('TN');">体&nbsp;&nbsp;能</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('XT');">形&nbsp;&nbsp;体</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('DW');">独&nbsp;&nbsp;舞</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('QW');">齐&nbsp;&nbsp;舞</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('JX');">即兴舞蹈</a></div>
+			</div>
+			<div id="skill_acting" class="pure-g skill hidden">
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('RAP');">Rap</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('CZ');">唱&nbsp;&nbsp;&nbsp;&nbsp;作</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('TF');">台&nbsp;&nbsp;&nbsp;&nbsp;风</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('ZY');">综艺感</a></div>
+				<div class="pure-u-1"><a href="javascript:;" onclick="babiFoster('BQ');">表情管理</a></div>
+			</div>
+			<div id="skill_finished" class="pure-g skill hidden">
+				<div class="pure-u-1">恭喜你，培养出了一位<b>“<span id="span_role"></span>”</b>练习生<br>是否签约该练习生？</div>
+				<div class="pure-u-1-2">
+					<a href="javascript:;" onclick="babiSaveInfo();">签约</a>
+				</div>
+				<div class="pure-u-1-2">
+					<a href="/">再瞅瞅其他</a>
+				</div>
+			</div>
+			<div id="skill_sucess" class="pure-g skill hidden">
+				<div class="pure-u-1">恭喜你，签约练习生成功!<br><span id="span_adress"></span></div>
+				<div class="pure-u-1-2">
+					<a href="javascript:;" onclick="showBabiAdress();">查看练习生编号</a>
+				</div>
+				<div class="pure-u-1-2">
+					<a href="/">返回首页</a>
+				</div>
+				<div class="pure-u-1"></div>
+			</div>
+		</div>
+		<div id="evalue_foster">
+			<div class="pure-u-1">
+				<a href="javascript:;" onclick="babiEvaluate();">>>点击评估练习生潜质<<</a>
+			</div>
+		</div>
+		<!--
+		<div id="skill_foster">
+			<div id="skill_sing" class="pure-g skill">
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('YL');">乐理</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('DC');">独唱</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('HY');">和音</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('HC');">合唱</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('JQ');">唱歌技巧</a></div>
+			</div>
+			<div id="skill_dancing" class="pure-g skill">
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('TN');">体能</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('XT');">形体</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('DW');">独舞</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('QW');">齐舞</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('JX');">即兴舞蹈</a></div>
+			</div>
+			<div id="skill_acting" class="pure-g skill">
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('RAP');">Rap</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('CZ');">唱作</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('TF');">台风</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('ZY');">综艺感</a></div>
+				<div class="pure-u-1-5"><a href="javascript:;" onclick="babiFoster('BQ');">表情管理</a></div>
+			</div>
+		</div>
+		-->
+		
+	</div>
+	<!--
+	<div id="div_notice">
+		<p>您还剩余 <span id="span_count">XX</span> 次Babi训练机会</p>
+	</div>
+	<div id="div_foster">
+		<div id="foster_photo" class="foster">
+			<img id="img_babi" class="pure-img" src="/static/img/babi_default.png" alt="Babi Photo" />
+		</div>
+		<div id="foster_skill" class="foster">
+			<div id="div_skill">
+				唱功: <span id="span_sing"></span>分
+				舞蹈: <span id="span_dancing"></span>分
+				演技: <span id="span_acting"></span>分
+			</div>
+			<ul id="ul_skill">
+				<li><a href="javascript:;" onclick="babiFoster('sing');">训练唱功</a><span></span></li>
+				<li><a href="javascript:;" onclick="babiFoster('dancing');">训练舞蹈</a></li>
+				<li><a href="javascript:;" onclick="babiFoster('acting');">训练演技</a></li>
+				<li><a href="javascript:;" onclick="babiFoster('lucky');">I'm Lucky</a></li>
+			</ul>
+			<div id="div_evaluate"><a href="/babigame/evalueBabiInfo/">训练完毕，快去评估一下训练生的潜力吧>></a></div>
+		</div>
+	</div>
+	<div style="display:none;">
+		<a href="#">评估练习生潜力>></a>
+	</div>
+	-->
+</div>
+</body>
+<script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+<script src="{% static 'js/nebPay.js' %}"></script>
+<script type="text/javascript">
+"use strict";
+$(document).ready(function(){
+	$.getJSON('/babigame/initBabiInfo/',function(result){
+		// console.log(result);
+		if(result['code']!=0){
+			alert('初始化Babi信息错误，点击返回首页');
+			window.location.href = '/';
+		}
+		var babiInfo = result['msg'];
+		// Init Babi's Train Count
+		$('#span_count').html(babiInfo['count']);
+		// Init Babi's Photo Info
+		$('#photo_babi').attr('src', babiInfo['photo']);
+		// Init Babi's Skill Info
+		$('#span_sing').html(babiInfo['skills']['sing']['score']);
+		$('#span_dancing').html(babiInfo['skills']['dancing']['score']);
+		$('#span_acting').html(babiInfo['skills']['acting']['score']);
+	});
+});
+function babiFoster(option){
+	var params = {'option':option};
+	$.getJSON('/babigame/updateBabiInfo/', params, function(result){
+		// console.log(result);
+		// console.log(JSON.stringify(result));
+		if(result['code']==1){
+			alert('服务器出错啦，训练失败>_<');
+			return
+		}
+		var babiInfo = result['msg'];
+		// Update Babi's Train Count
+		$('#span_count').html(babiInfo['count']);
+		// Update Babi's Photo Info
+		$('#photo_babi').attr('src', babiInfo['photo']);
+		// Update Babi's Skill Info
+		$('#span_sing').html(babiInfo['skills']['sing']['score']);
+		$('#span_dancing').html(babiInfo['skills']['dancing']['score']);
+		$('#span_acting').html(babiInfo['skills']['acting']['score']);
+		// Update Babi's Tips
+		$('#span_tips').html(babiInfo['tips']);
+		// Update Babi's Role
+		$('#span_role').html(babiInfo['role']);
+		if(result['code']==2){
+			$('#span_tips').html('');
+			$('.skill').addClass('hidden');
+			$('#skill_finished').removeClass('hidden');
+		}
+	});
+}
+function babiEvaluate(){
+	$.getJSON('/babigame/evaluateBabiInfo/', function(result){
+		// console.log(result);
+		alert(result['msg']);
+		return
+	});
+}
+function showFosterSkills(skill){
+	$('.skill').addClass('hidden');
+	$('#'+skill).removeClass('hidden');
+}
+function showBabiAdress(){
+	$('#span_adress').removeClass('hidden');
+}
+function babiSaveInfo(){
+	var babiInfo;
+	$.ajax({
+		type: 'get',
+		url: '/babigame/saveBabiInfo/',
+		data: '',
+		async: false,
+		dataType: 'json',
+		success: function(result){
+			"use strict";
+			console.log(JSON.stringify(result));
+			if(result['code']!=0){
+				alert(result['msg']);
+				return
+			}
+			babiInfo = result['msg'];
+			var babiSession = babiInfo['adress'];
+			console.log(babiSession);
+
+			var dappContactAddress = "n1oRcaG7KLV9d9ohDBGHst5ZgbFRmspPed9";
+			var NebPay = require("nebpay");	//https://github.com/nebulasio/nebPay
+			var nebPay = new NebPay();
+			var serialNumber;
+			var callbackUrl = NebPay.config.mainnetUrl;
+			var resultStatus;
+
+			var to = dappContactAddress;
+			var value = "0";
+			var callFunction = "save";
+			var callArgs = "[\"" + babiSession + "\",\"" + babiInfo['tips'] + "\"]";
+
+
+			serialNumber = nebPay.call(to, value, callFunction, callArgs, {
+				callback: callbackUrl,
+				listener: function (resp) {
+					console.log("Start Query Excute Reuslt Info...");
+					resultStatus = setInterval(function(){
+						nebPay.queryPayInfo(serialNumber)
+						.then(function(resp){
+							// alert(typeof(resp)+'|'+typeof(resp.data));
+							console.log("Query Excute Success! " + resp);
+							// alert(typeof(resp)+'|'+typeof(resp.data));
+							// var flag = resp.parseJSON();
+							// console.log("###"+resp+'|'+typeof(resp));
+							var excuteResult = JSON.parse(resp);
+							if(excuteResult['data']['status']==1){
+								var params = {
+									'company_address': excuteResult['data']['from'],
+									'babi_session': babiSession,
+								}
+								$.ajax({
+									type: 'post',
+									url: '/babigame/saveCompanyInfo/',
+									data: params,
+									async: false,
+									dataType: 'json',
+									success: function(result){
+										if (result['code']==0){
+											console.log(result['msg']);
+											$('#evalue_foster').addClass('hidden');
+											$('.skill').addClass('hidden');
+											$('#skill_sucess').removeClass('hidden');
+											$('#span_adress').html(babiInfo['adress']).addClass('hidden');
+											clearInterval(resultStatus);
+										}else{
+											console.log(result['msg']);
+										}
+									}
+								});
+							}else{
+								$('#skill_finished').html('<div class="pure-u-1">签约中，请耐心等待...</div>');
+							}
+							// clearInterval(resultStatus);
+						})
+						.catch(function(err){
+							console.log(err);
+						});
+					}, 5000);
+				}
+			});
+			alert('即将调用NAS钱包签约练习生，请稍等！');
+		}
+	});
+
+}
+
+/*
+function babiSaveInfo(){
+	var babiInfo;
+	$.ajax({
+		type: 'get',
+		url: '/babigame/saveBabiInfo/',
+		data: '',
+		async: false,
+		dataType: 'json',
+		success: function(result){
+			"use strict";
+			console.log(JSON.stringify(result));
+			if(result['code']!=0){
+				alert(result['msg']);
+				return
+			}
+			babiInfo = result['msg'];
+			var babiSession = babiInfo['adress'];
+			console.log(babiSession);
+
+			var dappContactAddress = "n1oRcaG7KLV9d9ohDBGHst5ZgbFRmspPed9";
+			var NebPay = require("nebpay");	//https://github.com/nebulasio/nebPay
+			var nebPay = new NebPay();
+			var serialNumber;
+			var callbackUrl = NebPay.config.mainnetUrl;
+			var resultStatus;
+
+			var to = dappContactAddress;
+			var value = "0";
+			var callFunction = "save";
+			var callArgs = "[\"" + babiSession + "\",\"" + babiInfo['tips'] + "\"]";
+
+
+			serialNumber = nebPay.call(to, value, callFunction, callArgs, {
+				callback: callbackUrl,
+				listener: function (resp) {
+					console.log("Start Query Excute Reuslt Info...");
+					resultStatus = setInterval(function(){
+						nebPay.queryPayInfo(serialNumber)
+						.then(function(resp){
+							// alert(typeof(resp)+'|'+typeof(resp.data));
+							console.log("Query Excute Success! " + resp);
+							// alert(typeof(resp)+'|'+typeof(resp.data));
+							// var flag = resp.parseJSON();
+							// console.log("###"+resp+'|'+typeof(resp));
+							var excuteResult = JSON.parse(resp);
+							if(excuteResult['data']['status']==1){
+								$('#evalue_foster').addClass('hidden');
+								$('.skill').addClass('hidden');
+								$('#skill_sucess').removeClass('hidden');
+								$('#span_adress').html(babiInfo['adress']).addClass('hidden');
+								clearInterval(resultStatus);
+							}else{
+								$('#skill_finished').html('<div class="pure-u-1">签约中，请耐心等待...</div>');
+							}
+							// clearInterval(resultStatus);
+						})
+						.catch(function(err){
+							console.log(err);
+						});
+					}, 5000);
+				}
+			});
+			alert('即将调用NAS钱包签约练习生，请稍等！');
+		}
+	});
+
+}
+*/
+
+</script>
+<script type="text/javascript">
+var NebPay = require("nebpay");
+var nebPay = new NebPay();
+var serialNumber;
+//var callbackUrl = NebPay.config.mainnetUrl;
+var callbackUrl = NebPay.config.testnetUrl;
+function onCallClick() {
+	var to = document.getElementById("callTo").value;
+	var value = document.getElementById("callValue").value;
+	var callFunction = document.getElementById("callFunction").value;
+	var callArgs = document.getElementById("callArgs").value;
+	serialNumber = nebPay.call(to, value, callFunction, callArgs, {
+		qrcode: {
+			showQRCode: true
+		},
+		goods: {
+			name: "test",
+			desc: "test goods"
+		},
+		callback:callbackUrl,
+		listener: listener  //set listener for extension transaction result
+	});
+	setTimeout(() => {
+		onrefreshClick();
+	}, 1000);
+}
+function onrefreshClick() {
+	nebPay.queryPayInfo(serialNumber,{callback: callbackUrl})   //search transaction result from server (result upload to server by app)
+	.then(function (resp) {
+		document.getElementById('result').value = resp;
+	})
+	.catch(function (err) {
+		console.log(err);
+	});
+}
+
+
+</script>
+</html>

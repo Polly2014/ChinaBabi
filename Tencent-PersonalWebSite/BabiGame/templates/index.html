@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+	<!-- CSS -->
+	<!--
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">	
+	-->
+<style type="text/css">
+#div_babitrainee{width: 100%;}
+#div_babitrainee a{ margin:0 auto; }
+</style>
+</head>
+<body>
+Polly
+<div id="div_babitrainee">
+	<a href="/babigame/foster/">签约练习生</a>
+</div>
+
+
+</body>
+<!-- Javascript -->
+<script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+<!--
+<script type="text/javascript">
+function formValidAndSubmit(){
+	var documentID = $('#documentID').val();
+	var documentCode = $('#documentCode').val();
+	if(!documentID || !documentCode){
+		alert('输入不能为空!');
+		return;
+	}
+	var params = {'documentID':documentID, 'documentCode':documentCode}
+	$.ajax({
+		type: 'post',
+		url: 'valid/',
+		data: params,
+		async: false,
+		dataType: 'json',
+		success: function(data){
+			// console.log("Ajax Data:"+data);
+			if(data['code']==0){
+				$('#form_search').submit();
+			}else{
+				alert(data['message']);
+			}
+		}
+	})
+	return false;
+}
+</script>
+-->
+</html>

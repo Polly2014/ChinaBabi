@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+	<!-- CSS -->
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+	<div class="login">
+		<div class="login_title">
+			<p>中国科学院办公厅公文管理查询系统</p>
+		</div>
+		<div class="login_main">
+			<div class="main_left"></div>
+			<div class="main_right">
+				<div class="right_title">公文查询</div>
+				<form id="form_search" action="detail/" method="post">
+					<div class="documentID">
+						<img src="/static/img/document.png" alt="">
+						<input id="documentID" name="documentID" autocomplete="off" type="text" placeholder="文档ID">
+					</div>
+					<div class="documentCode">
+						<img src="/static/img/password.png" alt="">
+						<input id="documentCode" name="documentCode" autocomplete="off" type="password" placeholder="查验码">
+					</div>
+					<button type="button" class="btn_submit" id="btn_submit" onclick="formValidAndSubmit()">查&nbsp;&nbsp;&nbsp;&nbsp;询</button>
+				</form>
+				<div id="div_admin"><a id="a_admin" href="/ucas_dm/admin/">管理员登陆</a></div>
+			</div>
+		</div>
+	</div>
+
+
+<!-- Javascript -->
+<script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

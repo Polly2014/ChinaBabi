@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Detail Info</title>
+<style type="text/css">
+body{
+	background: #0058ac;
+}
+h1{
+	font-size: 1.2em;
+	color: #0064c8;
+}
+#div_return{
+	position: absolute;
+	width: 200px;
+	height: 30px;
+	bottom: 0;
+	left: 50%;
+	margin-left: -100px;
+	background-color: #e8edf1;
+	border-radius: 20px 20px 0 0;
+}
+#div_return a{
+	display: block;
+	width: 100%
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 20px 20px 0 0;
+	box-shadow: 0 0 20px rgba(0,0,0,.4);
+	font-weight: 600;
+	color: #0058ac;
+}
+#div_return a:hover{
+	cursor: pointer;
+	color: red;
+}
+#container{
+	position: absolute;
+	width: 800px;
+	height: 500px;
+	top: 50%;
+	left: 50%;
+	margin-top: -250px;
+	margin-left: -400px;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #e8edf1;
+	box-shadow: 0 0 20px rgba(0,0,0,.4);
+}
+#left{
+	width:45%;
+	height: auto;
+	float: left;
+}
+#right{
+	width: 43%;
+	height: 100%;
+	float: left;
+	margin-left: 10%;
+	padding-right: 2%;
+	overflow-y: auto;
+}
+.hidden{
+	display: none;
+}
+.ul_info{
+	list-style-type: none;
+	border: 1px solid #0064c8;
+	padding: 0;
+}
+.ul_info li{
+	list-style-type: none;
+	padding: 10px 10px;
+	border: 1px solid #0064c8;
+}
+.ul_info li span{
+	color: #0064c8;
+	display: inline-block;
+	margin: 0;
+}
+.ul_info .span_attr{
+	width: 25%;
+}
+.ul_info .span_val{
+	width: 75%;
+}
+</style>
+
+</head>
+<body>
+	<div id="container">
+		<div id="left">
+			<div id="documentInfo">
+				<h1>基本信息</h1>
+				<ul class="ul_info ul_baseInfo">
+					<li><span class="span_attr">公文序号</span><span class="span_val d_id">-</span></li>
+					<li><span class="span_attr">来文单位</span><span class="span_val d_from">-</span></li>
+					<li><span class="span_attr">题目摘要</span><span class="span_val d_title">-</span></li>
+					<li><span class="span_attr">录入时间</span><span class="span_val d_time">-</span></li>
+				</ul>
+			</div>
+			<div id="RecordNow">
+				<h1>当前状态</h1>
+				<ul class="ul_info ul_CurrentInfo">
+					<li><span class="span_attr">转发时间</span><span class="span_val c_time_f">-</span></li>
+					<li><span class="span_attr">转发去向</span><span class="span_val c_to">-</span></li>
+					<li><span class="span_attr">回收时间</span><span class="span_val c_time_r">-</span></li>
+					<li><span class="span_attr">领导意见</span><span class="span_val c_opinion">-</span></li>
+				</ul>
+			</div>
+		</div>
+		<div id="right">
+			<div id="RecordHistory">
+				<h1>流转记录</h1>
+<!-- 				<ul class="ul_info ul_HistoryInfo">
+					<li><span class="span_attr">转发时间</span><span class="span_val c_time_f">-</span></li>
+					<li><span class="span_attr">转发去向</span><span class="span_val c_to">-</span></li>
+					<li><span class="span_attr">回收时间</span><span class="span_val c_time_r">-</span></li>
+					<li><span class="span_attr">领导意见</span><span class="span_val c_opinion">-</span></li>
+				</ul> -->
+			</div>
+		</div>
+	</div>
+	<div id="div_return">
+		<a id="a_return" href="/ucas_dm/">返回</a>
+	</div>
+
+	<span id="documentID" class="hidden">{{ documentID }}</span>
+	<span id="documentCode" class="hidden">{{ documentCode }}</span>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var documentID = $('#documentID').html();
+	var documentCode = $('#documentCode').html();
+	var params = {
+		'documentID': documentID,
+		'documentCode': documentCode
+	};
+	$.get('/ucas_dm/getDetailInfo/', params, function(data){
+		console.log(data);
+		if(data['code']==1) return;
+		var DocumentInfo = data['message']['DocumentInfo'];
+		var RecordInfo = data['message']['RecordInfo'];
+		$('.ul_baseInfo span.d_id').html(DocumentInfo['id']);
+		$('.ul_baseInfo span.d_from').html(DocumentInfo['location_from']);
+		$('.ul_baseInfo span.d_title').html(DocumentInfo['title']);
+		$('.ul_baseInfo span.d_time').html(DocumentInfo['time_recieve']);
+		if(data['code']==0){
+			var Current = RecordInfo['Current'];
+			$('.ul_CurrentInfo span.c_time_f').html(Current['time_forward']);
+			$('.ul_CurrentInfo span.c_to').html(Current['location_to']);
+			$('.ul_CurrentInfo span.c_time_r').html(Current['time_recycle']);
+			$('.ul_CurrentInfo span.c_opinion').html(Current['opinion_leader']);
+			var History = RecordInfo['History'];
+			$.each(History, function(index, h){
+				var Item = $('.ul_CurrentInfo').clone().removeClass('ul_CurrentInfo');
+				Item.find('span.c_time_f').html(h['time_forward']);
+				Item.find('span.c_to').html(h['location_to']);
+				Item.find('span.c_time_r').html(h['time_recycle']);
+				Item.find('span.c_opinion').html(h['opinion_leader']);
+				$('#RecordHistory').append(Item);
+			});
+		}
+	}, 'json');
+});
+</script>
+</body>
+</html>

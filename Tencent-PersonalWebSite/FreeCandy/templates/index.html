@@ -1,0 +1,748 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+	
+	<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+	
+
+		<title>FreeCandy: 最专业的糖果网站</title>
+		<meta name="description" content="每种空投第一个提交给我们的用户，您的邀请链接会出现在FreeCandy上。">
+
+		<meta itemprop="name" content="FreeCandy: 最专业的糖果网站">
+		<meta itemprop="description" content="每种空投第一个提交给我们的用户，您的邀请链接会出现在FreeCandy上。">
+		<meta itemprop="image" content="https://i.loli.net/2018/04/19/5ad89048c1ec2.png">
+
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:title" content="FreeCandy: 最专业的糖果网站">
+		<meta name="twitter:description" content="每种空投第一个提交给我们的用户，您的邀请链接会出现在FreeCandy上。">
+		<meta name="twitter:creator" content="@AndreyAzimov">
+		<meta name="twitter:image:src" content="https://i.loli.net/2018/04/19/5ad89048c1ec2.png">
+
+		<meta name="og:title" content="FreeCandy: 最专业的糖果网站">
+		<meta name="og:description" content="每种空投第一个提交给我们的用户，您的邀请链接会出现在FreeCandy上。">
+		<meta name="og:image" content="https://i.loli.net/2018/04/19/5ad89048c1ec2.png">
+		<meta name="og:site_name" content="FreeCandy: 最专业的糖果网站">
+		<meta name="og:type" content="website">
+
+<link rel="shortcut icon" href="https://i.loli.net/2018/04/19/5ad89048c1ec2.png" type="image/x-icon">
+<link rel="icon" href="https://i.loli.net/2018/04/19/5ad89048c1ec2.png" type="image/x-icon">
+		
+
+
+<link href="{% static 'css/font.css' %}" rel="stylesheet">
+
+	<style>
+
+	* {
+		font-family: "Barlow";
+	}
+
+	body {
+		margin: 0;
+	}
+	
+	html {
+		box-sizing: border-box;
+		height: 100%;
+	}
+	*,
+	*:before,
+	*:after {
+		box-sizing: inherit;
+	}
+	#logo{
+		position: absolute;
+		left: 15%;
+		top: 5px;
+		border: none;
+		box-shadow: none;
+		width: 230px;
+		height: 100px;
+		z-index: 999;
+	}
+	#logo img{
+		width: 100%;
+		height: 100%;
+	}
+	.logo {
+		position: absolute;
+		left: 30px;
+		top: 30px;
+		border: none;
+		box-shadow: none;
+		width: 200px;
+		height: 70px;
+		z-index: 999;
+	}
+
+	#banner{
+		position: relative;
+		text-align: center;
+		/*background-image: url("https://i.loli.net/2018/04/19/5ad89048c1ec2.png");*/
+		background-size: cover;
+		width:  100%;
+		
+		min-height: 80vh;
+		display: inline-flex;
+		flex-direction: column;
+
+		align-items: center;
+		justify-content: center;
+
+		padding: 50px;    
+	}
+
+	.banner-text{
+		max-width: 1200px;
+		color: white;
+		z-index: 99999999;
+		margin-top: 6%;
+		margin-bottom: 5%;
+
+	}
+
+	.banner-text > *:not(last-child) {
+		margin-bottom: 25px; /* например */
+	}
+
+	.dimmer {
+		position:absolute;
+		width:100%;
+		height:100%;
+		left:0;
+		top:0;
+		
+		background-color: rgba(
+			
+			16,
+			15,
+			15,
+			0.35);
+	
+		z-index:1;
+	}
+
+	#myInput {
+
+		background-image: url('https://www.w3schools.com/css/searchicon.png');
+		background-position: 10px 12px;
+		background-repeat: no-repeat;
+		width: 15%;
+		font-size: 16px;
+		padding: 12px 20px 12px 40px;
+		border: 1px solid #ddd;
+		margin-bottom: 12px;
+		border-radius: 5px;
+		position: absolute;
+		right: 10px;
+	}
+
+	.form {
+		padding-top: 25px;
+		margin-bottom: 25px;
+	 /* padding-bottom: 200px;*/
+
+		
+
+	}
+
+		.button {
+ 
+		color: white;
+		padding: 15px 30px;
+		/*border: 8px solid;*/
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		background: none;
+		font-size: 16px;
+		/*text-shadow: 1px 1px 1px rgba(0,0,0,0.35);*/
+ 
+	}
+ .button:hover {
+		border-color: white;
+		transition: .3s ease-in-out;
+		background: white;
+		color: rgba(41, 38, 38, 0.73);
+		
+	}
+ 
+	input.button {
+	cursor:pointer;
+	}
+	
+	input { padding:0.5em; border-radius:5px; }
+	
+	input[type="submit"] {
+			width: auto;
+			font-size: 2.7em;
+			font-weight: 600;
+	}
+
+
+
+
+.sort {
+	display: none;}
+
+
+
+	.typewrite {
+		margin: 50px;
+	}
+
+	h1{
+		font-size: 4.0em;
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+		margin-top: 0;
+		max-width: 1100px;
+	}
+
+	h2{
+		font-size: 1.3em;
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+	}
+
+
+
+	a:hover {
+			text-decoration: underline;
+	}
+
+	.img-card{
+
+		background-size: cover;
+		width: 100%;
+		height: 100%;
+
+	}
+
+	#cards {
+		margin-top: 40px;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+
+
+	.card {
+
+		
+
+
+		position: relative;
+		width: 330px;
+		height: 250px;
+		padding: 0 20px;
+		margin: 20px;
+		display: inline-block;
+		-webkit-transition: .3s ease-in-out;
+		transition: .3s ease-in-out;
+		border-radius: 5px;
+		background-size: cover;
+		display: none;
+
+	}
+
+	.card:after {
+		border-radius: 5px;
+		display: block;
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(
+			16,
+			15,
+			15,
+			0.35);
+	}
+
+	.card:hover {
+		transform: scale(1.05);
+	}
+
+
+	.info {
+		width: 100%;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+	 /* margin: auto;*/
+		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
+		text-align: center;
+		z-index: 1;
+
+	}
+
+	.card-title {
+		font-size: 1.3em;
+		line-height: 1.3em;
+		z-index: 999;
+		color: white;
+		text-decoration: none;
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+		margin-left: 7%;
+		margin-right: 7%;
+	}
+
+	.card-description {
+		font-size: 1em;
+		color: white;
+		margin: 0;
+		margin-top: 0px;
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+	}
+
+	.card-param-1 {
+		position: absolute;
+		font-size: 0.9em;
+		color: white;
+		z-index: 2;
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+	}
+
+	.card-param-2 {
+		position: absolute;
+		bottom: 0;
+		right: 20px;
+		font-size: 0.9em;
+		color: white;
+		z-index: 2;
+		text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+	}
+
+
+	.by{
+		text-align: center;
+		color: black;
+		font-size: 1.25em;
+		line-height: 1.3em;
+		padding-bottom: 35px;
+	}
+
+	a {
+		color: black;
+		text-decoration: none;
+		font-weight: 570;
+	}
+
+	a:hover {
+		color: #6f6f6f;
+		text-decoration: none;
+	}
+
+	#contact {
+			position: fixed;
+			text-align: center;
+			z-index: 10;
+			right: 30px;
+			bottom: 30px;
+			text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+			border-radius: 50%;
+			border-width: 4px;
+			width:100px;
+			height:100px;
+	}
+	#contact:hover {
+		transform: scale(1.05);
+		-webkit-transition: .3s ease-in-out;
+		transition: .3s ease-in-out;
+	}
+	
+	#img-circle {
+
+		width: 70px;
+		border-radius: 100%
+
+	}
+
+	#contact {
+		background-size:cover;
+		background-position: center center;
+	}
+	#contact-2 {
+			display: inline-block;
+			text-align: center;
+			z-index: 3;
+			right: 30px;
+			bottom: 30px;
+			text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+
+	}
+
+	#img-circle-2 {
+		vertical-align: middle;
+		margin-left: 0.5em;
+		display: inline-block;
+		width: 150px;
+		border-radius: 100%;
+
+	}
+
+	#img-circle-2:hover {
+		transform: scale(1.05);
+		-webkit-transition: .3s ease-in-out;
+		transition: .3s ease-in-out;
+	}
+
+
+	.btn {
+		font-size: 1.3em;
+		font-weight:600;
+		color:rgb(100,100,100);
+		border: none;
+		outline: none;
+		padding:0.5em;
+		padding-left:1em;
+		padding-right:1em;
+		text-transform:uppercase;
+		background-color: white;
+		cursor: pointer;
+		border:1px solid #ccc;
+		border-style: solid;
+		border-radius: 5px;
+		margin:0.65em;
+		display:inline-block;
+		line-height:2;
+	}
+
+	.btn:hover, .active {
+		background-color:rgb(214,214,214);
+	}
+
+	.show {
+		display: inline-block;
+	}
+
+	#myBtnContainer {
+		
+		color: white;
+		z-index: 5;
+		bottom: 1em;
+		width:100%;
+		text-align:center;
+		left:0;
+	}
+
+	.myBtnContainerBox {
+
+		
+		width:100%;
+		max-width:12
+		00px;
+		margin:0 auto;
+	}
+
+	h1 {
+		font-weight:800;
+		margin-bottom:0;
+	}
+	h3 {
+		font-weight:100;
+		margin-top: 3vh;
+	}
+
+	.box {
+			background: red;
+			height: 200px;
+			width: 200px;
+			display: inline-block;
+	}
+
+	.shumniy-fix {
+		display: inline-block;
+		margin-bottom: 70px;
+	}
+
+
+	@media screen and (max-width: 1020px) {
+
+			#banner{
+					min-height: 43vh;
+			}
+
+			h1 {
+				font-size: 5em;
+			}
+
+			.card {
+				width: 90%;
+				height: 500px;
+			}
+
+			.card-title {
+				font-size: 3.3em;
+			}
+
+			.card-param-1 {
+				font-size: 1.9em;
+			}
+
+			.card-param-2 {
+				font-size: 1.9em;
+			}
+
+			.card-description {
+				font-size: 2.2em;
+			}
+	}
+
+		.description-header {
+			max-width: 700px;
+			font-size: 1.8em;
+			font-weight: 500;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.navbar {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			z-index: 2;
+		}
+
+		.navbar > *:not(:last-child),
+		.navbar-section > *:not(:last-child) {
+			margin-right: 2rem;
+		}
+
+		.navbar-link {
+			color: white;
+			text-decoration: none;
+			font-size: 1.5rem;
+		}
+
+		.selected {
+			color: white;
+			border-bottom: 2px solid white;
+		}
+
+		a.selected:hover {
+			color: white;
+		}
+
+		.not-selected {
+			color: #dad7d7;
+		}
+
+		a.not-selected:hover {
+			text-decoration: none;
+			border-bottom: 2px solid white;
+			color: white;
+		}
+		.dimmer{
+			background-image: url({% static 'img/pic_big.jpg' %})
+		}
+
+	</style>
+
+<link href="{% static 'css/reset-min.css' %}" rel="stylesheet">
+<link href="{% static 'css/buttons.css' %}" rel="stylesheet">
+<style type="text/css">
+.btn_publish{
+	border: 4px solid #FFF;
+	background: transparent;
+	border-radius: 50px;
+	padding: 10px 30px;
+	color: #FFF;
+	font-weight: 300;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	outline: none;
+}
+.btn_publish:hover{
+	cursor: pointer;
+	color: #ff2a5c;
+	border: 4px solid #ff2a5c;
+}
+.btn_publishItem{
+	width: 5%;
+	border: 2px solid #FFF;
+	background: transparent;
+	margin-left: 2%;
+	margin-right: 2%;
+	padding: 10px 30px;
+	color: #FFF;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	outline: none;
+}
+.btn_publishItem:hover{
+	cursor: pointer;
+	color: #ff2a9b;
+	border: 2px solid #ff2a9b;
+}
+
+</style>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+</head>
+<body>
+
+<div id="logo"><img src="{% static 'img/logo.png' %}" alt="Logo"></div>
+
+<section id="banner">
+<!--   <nav class="navbar">
+		<div class="navbar-section">
+			<a class="navbar-link selected" href="#">Home</a>
+		</div>
+
+		<div class="navbar-section">
+			<a class="navbar-link not-selected" href="#">Cafe</a>  
+			<a class="navbar-link not-selected" href="#">City Walk</a>
+		</div>
+	</nav> -->
+ <!--  <img class="logo" src=" soon "> -->
+		 <div class="banner-text">
+					<h1 style="font-size:1.2em;">FreeCandy: 最专业的糖果网站</h1>
+					<h2 class="description-header" style="font-size:1.9em;">每种空投第一个提交给我们的用户，您的邀请链接会出现在FreeCandy上。</h2>
+
+					
+					<form method="POST" class="form" action="publish/">
+						<input id="btn_publish" class="btn_publish" type="submit" value="一键发布FreeCandy"></input> 
+					</form>
+
+			</div>
+	<div class="dimmer"></div>
+
+<div id="myBtnContainer">
+	<div class="myBtnContainerBox">
+	<!--
+	<button style="width:90px; padding-right:30px;" class="button pink serif oval glass" onclick="filterSelection('all')">all</button>
+	<button style="padding-right:30px;" class="button blue serif glass oval" onclick="filterSelection('ETH')">ETH</button>
+	<button style="padding-right:30px;" class="button green serif glossy oval" onclick="filterSelection('NEO')">NEO</button>
+	<button style="padding-right:30px;" class="button orange serif glossy oval" onclick="filterSelection('EOS')">EOS</button> 
+	-->
+	<button class="btn_publishItem" onclick="filterSelection('all')">all</button>
+	<button class="btn_publishItem" onclick="filterSelection('ETH')">ETH</button>
+	<button class="btn_publishItem" onclick="filterSelection('NEO')">NEO</button>
+	<button class="btn_publishItem" onclick="filterSelection('EOS')">EOS</button> 
+	</div> 
+	</div> 
+
+	<div class="sort">
+		<button id="alphBnt" class="btn">PRICE ↓</button><button id="numBnt" class="btn">PRICE ↑</button> 
+	</div> 
+
+
+</div> 
+</section>
+
+
+
+
+
+
+<div>
+<div id="cards">
+{% for candy in candyList %}
+	<a href="{{ candy.candy_link }}{{ candy.candy_name }}" class=" card {{ candy.candy_type }}" style="background-image:url({{ candy.candy_logo }})">
+		<p class="card-param-1">Candy Score: {{ candy.candy_score }}分</p>
+		<p class="card-param-2">{{ candy.candy_type }}</p>
+		<div class="info">
+			<h2 class="card-title">{{ candy.candy_name }}</h2>
+			<p class="card-description">{{ candy.candy_note }}</p>
+		</div>
+	</a>
+{% endfor %}
+
+</div><a id=contact target="_blank" href="" style="background-image:url('');"></a><p class="by">Made by <a href="#">Free Candy Team</a></p>
+
+
+
+<script>
+filterSelection("all")
+function filterSelection(c) {
+	var x, i;
+	x = document.getElementsByClassName("card");
+	if (c == "all") c = "";
+	for (i = 0; i < x.length; i++) {
+		w3RemoveClass(x[i], "show");
+		if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+	}
+}
+
+function w3AddClass(element, name) {
+	var i, arr1, arr2;
+	arr1 = element.className.split(" ");
+	arr2 = name.split(" ");
+	for (i = 0; i < arr2.length; i++) {
+		if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+	}
+}
+
+function w3RemoveClass(element, name) {
+	var i, arr1, arr2;
+	arr1 = element.className.split(" ");
+	arr2 = name.split(" ");
+	for (i = 0; i < arr2.length; i++) {
+		while (arr1.indexOf(arr2[i]) > -1) {
+			arr1.splice(arr1.indexOf(arr2[i]), 1);     
+		}
+	}
+	element.className = arr1.join(" ");
+}
+
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+	btns[i].addEventListener("click", function(){
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active", "");
+		this.className += " active";
+	});
+}
+
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+	btns[i].addEventListener("click", function(){
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active", "");
+		this.className += " active";
+	});
+}
+
+
+</script>
+
+<script>
+	//var $divs = $("div.box");
+	var $divs = $("a.card");
+
+	$('#alphBnt').on('click', function () {
+			var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
+					return $(a).find("p.card-description").text() > $(b).find("p.card-description").text();
+			});
+			$("#cards").html(alphabeticallyOrderedDivs);
+
+	});
+
+	$('#numBnt').on('click', function () {
+			var numericallyOrderedDivs = $divs.sort(function (a, b) {
+					return $(a).find("p.card-description").text() < $(b).find("p.card-description").text();
+			});
+			$("#cards").html(numericallyOrderedDivs);
+	});
+
+
+
+	
+	// $('#numBnt').click(function(){
+	//   alert("The numBnt was clicked");
+	// });
+
+	</script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"67a6550e97","applicationID":"100034697","transactionName":"Z1VSY0JQW0ZZUxZRXF4fZUVZHlRFUR8LVldVSB5HWEE=","queueTime":3,"applicationTime":867,"atts":"SxJRFQpKSEg=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>

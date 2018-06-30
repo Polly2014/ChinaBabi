@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Free Candy Detail - {{ candy_name }}</title>
+<style type="text/css">
+body{
+	background-image:url({% static 'img/pic_big.jpg' %}); 
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+#candy_name{
+	/*color: #FFF;*/
+}
+#guest_phone{
+	width: 400px;
+	height: 45px;
+	/*border-radius: 13px;*/
+	margin-top: 0;
+	background: transparent;
+	opacity: 0.7;
+	border: none;
+	font-size: 24px;
+	border-bottom: 2px solid;
+	outline: none;
+}
+#btn_confirm{
+	width: 100px;
+	height: 55px;
+	border: none;
+	background: transparent;
+	font-size:2em;
+	outline: none;
+}
+#btn_confirm:hover{
+	color: #FFF;
+	cursor: pointer;
+}
+#div_FreeCandyInfo{
+	margin-top: 50px;
+	font-size: 25px;
+}
+#div_AccountInfo{
+	margin-top: 50px;
+}
+#tbl_AccountInfo{
+	width: 600px;
+	height: auto;
+	margin:0 auto;
+	border: 1px solid;
+	border-right:1px solid;
+	border-bottom:1px solid;
+}
+#tbl_AccountInfo th,td{
+	border-left:1px solid;
+	border-top:1px solid;
+}
+#div_return{
+	position: fixed;
+	width: 100px;
+	height: 30px;
+	top: 20px;
+	right: 25%;
+}
+#div_return a{
+	color: #000;
+	text-decoration: none;
+}
+#div_return a:hover{
+	color: #FFF;
+	text-decoration: none;
+}
+#btn_getFreeCandy{
+	border: 2px solid #000;
+	background: transparent;
+	border-radius: 50px;
+	padding: 10px 30px;
+	color: #000;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	outline: none;
+	margin-top: 10px;
+}
+#btn_getFreeCandy:hover{
+	cursor: pointer;
+	border: 2px solid #FFF;
+	color: #FFF;
+}
+</style>
+</head>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">
+function validGuestInfo(){
+	var guest_phone = $('#guest_phone').val();
+	var candy_name = $('#candy_name').html();
+	var params = {
+		'guest_phone': guest_phone,
+		'candy_name': candy_name
+	}
+	$.ajax({
+		type: 'post',
+		url: '/freecandy/validGuestInfo/',
+		data: params,
+		async: false,
+		dataType: 'json',
+		success: function(data){
+			// console.log("Ajax Data:"+data);
+			// alert(data['message']);
+			if(data['code']==1){
+				alert(data['message']);
+				return false;
+			}else{
+				$('#div_FreeCandyInfo').css('display', 'block');
+				$('#candy_amount').html(data['message']['candy_amount']);
+				$('#guest_wallet').html(data['message']['guest_wallet']);
+			}
+		}
+	});
+	return false;
+}
+function getFreeCandy(){
+	var guest_phone = $('#guest_phone').val();
+	var guest_wallet = $('#guest_wallet').html();
+	var candy_name = $('#candy_name').html();
+	var candy_amount = $('#candy_amount').html();
+	params = {
+		'guest_phone': guest_phone,
+		'guest_wallet': guest_wallet,
+		'candy_name': candy_name,
+		'candy_amount': candy_amount
+	}
+	$.ajax({
+		type: 'post',
+		url: '/freecandy/getFreeCandy/',
+		data: params,
+		async: false,
+		dataType: 'json',
+		success: function(data){
+			// console.log("Ajax Data:"+data);
+			// alert(data['message']);
+			if(data['code']==1){
+				alert(data['message']);
+				return;
+			}else{
+				alert('恭喜你，领取Free Candy成功！');
+				$('#div_FreeCandyInfo').css('display', 'none');
+				$('#div_AccountInfo').show();
+				// console.log(data['message']);
+				$(data['message']).each(function(i,d){
+					// console.log(d);
+					var code = "<tr><td>"+d['candy_name']+"</td><td>"+d['candy_amount']+"</td><td>"+d['recieve_time']+"</td></tr>";
+					$('#tbl_AccountInfo').append(code);
+				});
+			}
+		}
+	});
+	return;
+}
+</script>
+<body>
+<div id="container">
+
+	<div style=" width:100%; margin-top:200px; text-align:center;">
+		<span id="candy_name" style="font-size:80px;">{{ candy_name }}</span><br />
+	</div>
+	<div style=" width:100%; height:40px; margin-top:50px; text-align:center; color:#FFF;">
+		<input type="text" name="guest_phone" id="guest_phone" placeholder="Enter Your Phone Number" />
+		<button id="btn_confirm" onclick="validGuestInfo()" type="button">确认</button>
+	</div>
+	<div id="div_FreeCandyInfo" style="display:none; width:100%; text-align:center;">
+		恭喜你获得 <span id="candy_amount">XX</span> 枚 {{ candy_name }} Free Candy!<br>
+		您的账户地址为：<span id="guest_wallet"></span><br>
+		<button id="btn_getFreeCandy" onclick="getFreeCandy()" type="button" >领取</button>
+	</div>
+	<div id="div_AccountInfo" style="display:none; width:100%; text-align:center;">
+		<table id="tbl_AccountInfo" cellpadding="0" cellspacing="0">
+			<tr>
+				<th>Candy Name</th>
+				<th>Amount</th>
+				<th>Recieve Time</th>
+			</tr>
+		</table>
+	</div>
+	<div id="div_return"><a href="/freecandy/">返回首页</a></div>
+</div>
+</body>
+</html>
